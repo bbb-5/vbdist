@@ -472,6 +472,29 @@ void changeMode(team** teams, pCombos* bpcs) {
   freeTui(tui);
 }
 
+// char ** db_path, 
+int askPathToOrFileOrDB(){
+  char defaultOption = 'D';
+  printf("No path to file or database given ");
+  printf("\nWould you like to use player file or database? [f/D] ");
+  fflush(stdout);
+  char ans = keyPress();
+  if (fgets(ans,sizeof ans, stdin))
+  if (ans == 'f' || ans == 'F'){
+    printf("\nEnter path to file: ");
+    printf("\nPath to file saved\n");
+    return 1;
+  }
+
+  if (ans == 'd' || ans == 'D'){
+    printf("\nEnter path to database: ");
+
+    printf("\nPath to database saved\n");
+    return 1;
+  }
+  return 0;
+}
+
 int askSaveToFile(char* fileName, team** teams) {
   printf("\nSave teams to a file? [y/N] ");
   fflush(stdout);
@@ -665,7 +688,8 @@ int main(int argc, char** argv) {
                                 : NO_SOURCE;
 
   if (SOURCE == NO_SOURCE) {
-    printUsage(stdout);
+    askPathToOrFileOrDB();
+    //printUsage(stdout);
     exit(1);
   }
 

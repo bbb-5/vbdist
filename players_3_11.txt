@@ -1,0 +1,38 @@
+# PlayerName | Defence Spike Serve Setting Saving Consistency (1-5)
+
+Ismo			| 4 4 4 3 3 4
+Toni			| 4 5 5 5 5 5
+Wilhelmiina		| 5 4 5 5 5 5
+Moona			| 3 3 3 3 3 4
+Edu			| 3 4 3 3 3 4
+Ilari Koskinen		| 4 4 4 3 4 4
+Sheharyar Arif		| 4 4 5 3 4 4
+Sean			| 4 4 5 3 3 5
+Aliisa			| 2 2 2 3 2 3
+Sara Leppänen		| 3 2 2 2 3 3
+Makreta Pyhäjärvi	| 3 2 3 3 3 3
+Niko Ekman		| 1 2 2 1 2 2
+Victor			| 3 4 3 2 3 4
+Eveliina Pyykkönen	| 3 3 2 3 3 3
+Gray			| 3 3 3 2 3 2
+Ayaz Karimov		| 3 3 3 4 3 3
+Janna			| 4 3 3 5 3 4
+Kasperi Paloniemi	| 2 3 3 2 2 3
+Ziang Chen		| 2 3 3 2 2 2
+Alex Liao		| 3 3 2 3 4 4
+Markus			| 
+Malla Siika		| 
+Mathis MEÏER		| 
+Raul Quesada Garcia	| 
+
+!Sara - DJ
+!Aliisa - Alex
+
+
+#QUEUE
+#Sebu | 4 4 3.5 3 3 4
+#DJ | 3 4 3 3 3 4
+#Leonard
+#Zane
+#Quake
+
