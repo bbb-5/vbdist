@@ -474,27 +474,33 @@ void changeMode(team** teams, pCombos* bpcs) {
 
 // char ** db_path, 
 int askPathToOrFileOrDB(){
+  char path[256];
   printf("No path to file or database given ");
   printf("\nWould you like to use player file or database? [f/D] ");
   fflush(stdout);
   char ans = keyPress();
+
   if (ans == 'f' || ans == 'F'){
     printf("\nEnter path to file: ");
     fflush(stdout);
-
-    printf("\nPath to file saved\n");
+    if(fgets(path, sizeof(path), stdin) != NULL){
+      printf("\nPath to file saved\n");
+    }
     return 1;
   }
 
   if (ans == 'd' || ans == 'D'){
     printf("\nEnter path to database: ");
     fflush(stdout);
-
-    printf("\nPath to database saved\n");
+    if(fgets(path, sizeof(path), stdin) != NULL){
+      printf("\nPath to database saved\n");
+    }
     return 1;
   }
   printf("\nDefault selected, enter path to database: \n");
-  printf("\nPath to database saved!");
+    if(fgets(path, sizeof(path), stdin) != NULL){
+      printf("\nPath to database saved\n");
+    }
 
   return 0;
 }
