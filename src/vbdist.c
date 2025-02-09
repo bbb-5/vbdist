@@ -4,6 +4,7 @@
 #include <math.h>
 #include <time.h>
 #include <ctype.h>
+#include <dirent.h> 
 
 #include "../include/tuiswap.h"
 #include "../include/tuidb.h"
@@ -472,7 +473,39 @@ void changeMode(team** teams, pCombos* bpcs) {
   freeTui(tui);
 }
 
-// char ** db_path, 
+void getPath(char* path){
+  if(fgets(path, sizeof(path), stdin) != NULL){
+      printf("\nPath to file saved\n");
+    }
+}
+
+void askPath(char prompt){
+  if (prompt == 'f' || prompt == 'F'){
+    printf("\nEnter path to file: ");
+  }
+
+  if (prompt == 'd' || prompt == 'D'){
+    printf("\nEnter path to database: ");
+  }
+
+  if (prompt != 'f' && prompt != 'F' && prompt != 'd' && prompt != 'D'){
+    printf("\nDefault selected, enter path to database: ");
+  }
+  fflush(stdout);
+}
+
+void promptPathToOrFileOrDB(){
+  char* path = malloc(256);
+  printf("No path to file or database given ");
+  printf("\nWould you like to use player file or database? [f/D] ");
+  fflush(stdout);
+  char ans = keyPress();
+  askPath(ans);
+  getPath(path);
+}
+
+
+/*
 int askPathToOrFileOrDB(){
   char path[256];
   printf("No path to file or database given ");
@@ -504,6 +537,7 @@ int askPathToOrFileOrDB(){
 
   return 0;
 }
+*/
 
 int askSaveToFile(char* fileName, team** teams) {
   printf("\nSave teams to a file? [y/N] ");
@@ -698,8 +732,9 @@ int main(int argc, char** argv) {
                                 : NO_SOURCE;
 
   if (SOURCE == NO_SOURCE) {
-    askPathToOrFileOrDB();
-    //printUsage(stdout);
+    printUsage(stdout);
+    promptPathToOrFileOrDB();
+    //askPathToOrFileOrDB();
     exit(1);
   }
 
