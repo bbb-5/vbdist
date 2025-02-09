@@ -473,8 +473,8 @@ void changeMode(team** teams, pCombos* bpcs) {
   freeTui(tui);
 }
 
-void getPath(char* path){
-  if(fgets(path, sizeof(path), stdin) != NULL){
+void getPath(char* path, int pathSize){
+  if(fgets(path, pathSize, stdin) != NULL){
       printf("\nPath to file saved\n");
     }
 }
@@ -495,13 +495,14 @@ void askPath(char prompt){
 }
 
 void promptPathToOrFileOrDB(){
-  char* path = malloc(256);
+  int pathSize = 256;
+  char* path = malloc(pathSize);
   printf("No path to file or database given ");
   printf("\nWould you like to use player file or database? [f/D] ");
   fflush(stdout);
   char ans = keyPress();
   askPath(ans);
-  getPath(path);
+  getPath(path, pathSize);
 }
 
 
