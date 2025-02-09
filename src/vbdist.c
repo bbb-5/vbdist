@@ -473,23 +473,44 @@ void changeMode(team** teams, pCombos* bpcs) {
   freeTui(tui);
 }
 
-void getPath(char* path, int pathSize){
-  if(fgets(path, pathSize, stdin) != NULL){
-      printf("\nPath to file saved\n");
+char* getPath(char* path, size_t pathSize){
+  char * pathInput = malloc(pathSize+1);
+  size_t len = 0;
+  pathInput[0] = '\0';
+  int c = 0;
+
+  while (1) {
+    cls(stdout);
+    printf("%s",pathInput);
+    fflush(stdout);
+    c = keyPress();
+    if (len < pathSize){
+      strcatc(pathInput, &len, c);
+    } 
+    
+    if (len > 0 && isBackspace(c)) {
+      pathInput[--len] = '\0';
+    } else if (isEnter(c)) {
+      break;
     }
+  }
+  printf("%s\n",pathInput);
+  printf("Path saved\n");
+  return pathInput;
+
 }
 
 void askPath(char prompt){
   if (prompt == 'f' || prompt == 'F'){
-    printf("\nEnter path to file: ");
+    printf("\nEnter path to file: \n");
   }
 
   if (prompt == 'd' || prompt == 'D'){
-    printf("\nEnter path to database: ");
+    printf("\nEnter path to database: \n");
   }
 
   if (prompt != 'f' && prompt != 'F' && prompt != 'd' && prompt != 'D'){
-    printf("\nDefault selected, enter path to database: ");
+    printf("\nDefault selected, enter path to database: \n");
   }
   fflush(stdout);
 }
@@ -502,43 +523,8 @@ void promptPathToOrFileOrDB(){
   fflush(stdout);
   char ans = keyPress();
   askPath(ans);
-  getPath(path, pathSize);
+  path = getPath(path, pathSize);
 }
-
-
-/*
-int askPathToOrFileOrDB(){
-  char path[256];
-  printf("No path to file or database given ");
-  printf("\nWould you like to use player file or database? [f/D] ");
-  fflush(stdout);
-  char ans = keyPress();
-
-  if (ans == 'f' || ans == 'F'){
-    printf("\nEnter path to file: ");
-    fflush(stdout);
-    if(fgets(path, sizeof(path), stdin) != NULL){
-      printf("\nPath to file saved\n");
-    }
-    return 1;
-  }
-
-  if (ans == 'd' || ans == 'D'){
-    printf("\nEnter path to database: ");
-    fflush(stdout);
-    if(fgets(path, sizeof(path), stdin) != NULL){
-      printf("\nPath to database saved\n");
-    }
-    return 1;
-  }
-  printf("\nDefault selected, enter path to database: \n");
-    if(fgets(path, sizeof(path), stdin) != NULL){
-      printf("\nPath to database saved\n");
-    }
-
-  return 0;
-}
-*/
 
 int askSaveToFile(char* fileName, team** teams) {
   printf("\nSave teams to a file? [y/N] ");
@@ -735,7 +721,6 @@ int main(int argc, char** argv) {
   if (SOURCE == NO_SOURCE) {
     printUsage(stdout);
     promptPathToOrFileOrDB();
-    //askPathToOrFileOrDB();
     exit(1);
   }
 
