@@ -1,4 +1,5 @@
 #include <assert.h>
+#include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -473,18 +474,18 @@ void changeMode(team** teams, pCombos* bpcs) {
   freeTui(tui);
 }
 
-char* getPath(char* path, size_t pathSize){
-  char * pathInput = malloc(pathSize+1);
+char* getPath(){
+  size_t max_len = 256;
+  char * pathInput = malloc(max_len+1);
   size_t len = 0;
   pathInput[0] = '\0';
   int c = 0;
-
   while (1) {
-    cls(stdout);
+    //cls(stdout);
     printf("%s",pathInput);
     fflush(stdout);
     c = keyPress();
-    if (len < pathSize){
+    if (len < max_len){
       strcatc(pathInput, &len, c);
     } 
     
@@ -493,37 +494,21 @@ char* getPath(char* path, size_t pathSize){
     } else if (isEnter(c)) {
       break;
     }
+  
   }
-  printf("%s\n",pathInput);
+  
+  printf("%s",pathInput);
   printf("Path saved\n");
   return pathInput;
-
-}
-
-void askPath(char prompt){
-  if (prompt == 'f' || prompt == 'F'){
-    printf("\nEnter path to file: \n");
-  }
-
-  if (prompt == 'd' || prompt == 'D'){
-    printf("\nEnter path to database: \n");
-  }
-
-  if (prompt != 'f' && prompt != 'F' && prompt != 'd' && prompt != 'D'){
-    printf("\nDefault selected, enter path to database: \n");
-  }
-  fflush(stdout);
 }
 
 void promptPathToOrFileOrDB(){
-  int pathSize = 256;
-  char* path = malloc(pathSize);
-  printf("No path to file or database given ");
-  printf("\nWould you like to use player file or database? [f/D] ");
+  //int pathSize = 256;
+  //char* path = malloc(pathSize);
+  printf("\nNo path to file or database given \n");
+  printf("Enter path: \n");
   fflush(stdout);
-  char ans = keyPress();
-  askPath(ans);
-  path = getPath(path, pathSize);
+  getPath();
 }
 
 int askSaveToFile(char* fileName, team** teams) {
